@@ -1,0 +1,118 @@
+/* Achsokiosk – Markenfarben aus Brand/Paket_V1/ACHSOKIOSK_BRAND_GUIDE_V1.md
+   Keine externen Schriften/Skripte (DSGVO): nur System-Schriften, reines CSS. */
+:root {
+  --petrol: #073A3C;
+  --petrol-tief: #042628;
+  --tuerkis: #147E80;
+  --papier: #FFE8C6;
+  --papier-hell: #FFF4E2;
+  --gold: #F9C667;
+  --orange: #D38C43;
+  --gruen: #8BA744;
+  --text: #FFF6E8;
+  --schatten: 0 18px 40px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+* { box-sizing: border-box; }
+html { background: var(--petrol-tief); scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--petrol) 0%, var(--petrol-tief) 100%);
+  padding: 0 16px;
+  overflow-x: hidden;
+  position: relative;
+}
+a { color: var(--gold); text-underline-offset: 3px; }
+a:hover { color: var(--papier); }
+h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; }
+
+/* Hintergrund: schwebende Papierschichten und Lichtpunkte */
+.himmel { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.himmel span { position: absolute; border-radius: 50%; filter: blur(2px); opacity: 0.55; animation: schweben 18s ease-in-out infinite alternate; }
+.himmel .b1 { width: 520px; height: 520px; left: -160px; top: -140px; background: radial-gradient(circle, var(--tuerkis) 0%, transparent 70%); }
+.himmel .b2 { width: 420px; height: 420px; right: -140px; top: 30%; background: radial-gradient(circle, rgba(249, 198, 103, 0.35) 0%, transparent 70%); animation-duration: 22s; }
+.himmel .b3 { width: 360px; height: 360px; left: 20%; bottom: -180px; background: radial-gradient(circle, rgba(139, 167, 68, 0.35) 0%, transparent 70%); animation-duration: 26s; }
+.himmel i { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px var(--gold); opacity: 0; animation: funkeln 6s ease-in-out infinite; }
+.himmel i:nth-child(4) { left: 12%; top: 22%; animation-delay: 0s; }
+.himmel i:nth-child(5) { left: 84%; top: 14%; animation-delay: 1.5s; }
+.himmel i:nth-child(6) { left: 72%; top: 62%; animation-delay: 3s; }
+.himmel i:nth-child(7) { left: 22%; top: 74%; animation-delay: 4.5s; }
+.himmel i:nth-child(8) { left: 50%; top: 8%; animation-delay: 2.2s; }
+@keyframes schweben { from { transform: translate(0, 0) scale(1); } to { transform: translate(40px, 30px) scale(1.08); } }
+@keyframes funkeln { 0%, 100% { opacity: 0; transform: scale(0.4); } 50% { opacity: 0.9; transform: scale(1); } }
+
+main, footer { max-width: 960px; margin: 0 auto; }
+
+/* Kopfbereich */
+.held { text-align: center; padding: 56px 0 24px; }
+.logo-rahmen { position: relative; display: inline-block; margin-bottom: 20px; }
+.logo-rahmen::before {
+  content: ""; position: absolute; inset: -22px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(249, 198, 103, 0.55) 0%, transparent 68%);
+  animation: leuchten 4s ease-in-out infinite;
+}
+.logo-rahmen img { position: relative; display: block; width: 200px; max-width: 55vw; height: auto; border-radius: 50%; box-shadow: var(--schatten); animation: wippen 6s ease-in-out infinite; }
+@keyframes leuchten { 0%, 100% { opacity: 0.55; transform: scale(0.96); } 50% { opacity: 1; transform: scale(1.04); } }
+@keyframes wippen { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-10px) rotate(1deg); } }
+.held h1 { font-size: clamp(2.4rem, 7vw, 4rem); margin: 0; font-weight: 800; }
+.held h1 em { font-style: normal; color: var(--gold); }
+.slogan { font-size: clamp(1.15rem, 3vw, 1.45rem); color: var(--papier); margin: 8px 0 0; }
+.unterzeile { max-width: 560px; margin: 16px auto 0; opacity: 0.85; }
+
+/* Themen-Karten im Papierlook */
+.themen { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin: 40px 0; }
+.karte {
+  background: linear-gradient(160deg, var(--papier-hell) 0%, var(--papier) 100%);
+  color: var(--petrol); border-radius: 18px; padding: 22px 22px 18px; box-shadow: var(--schatten);
+  transform: rotate(var(--neigung, 0deg)); transition: transform 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
+}
+.karte::after { content: ""; position: absolute; left: 22px; right: 22px; bottom: -7px; height: 14px; border-radius: 0 0 14px 14px; background: #E8C795; z-index: -1; }
+.karte:nth-child(1) { --neigung: -1.2deg; }
+.karte:nth-child(2) { --neigung: 0.8deg; }
+.karte:nth-child(3) { --neigung: -0.6deg; }
+.karte:hover { transform: rotate(0deg) translateY(-6px); box-shadow: 0 26px 50px rgba(0, 0, 0, 0.4); }
+.karte .symbol { font-size: 2rem; line-height: 1; }
+.karte h3 { margin: 10px 0 6px; font-size: 1.15rem; }
+.karte p { margin: 0; font-size: 0.97rem; color: #20484A; }
+
+/* Kanäle */
+.kanaele-block { text-align: center; margin: 48px 0 24px; }
+.kanaele-block h2 { color: var(--gold); font-size: 1.35rem; margin: 0 0 18px; }
+.kanaele { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; padding: 0; margin: 0; list-style: none; }
+.kanaele a {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px;
+  background: var(--papier); color: var(--petrol); font-weight: 700; text-decoration: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3); transition: transform 0.2s ease, background 0.2s ease;
+}
+.kanaele a:hover, .kanaele a:focus-visible { background: var(--gold); transform: translateY(-3px); }
+.kanaele small { font-weight: 500; opacity: 0.7; }
+
+.hinweis { text-align: center; font-size: 0.9rem; opacity: 0.75; margin: 32px auto 0; max-width: 620px; }
+
+/* Rechtstexte */
+.blatt {
+  max-width: 760px; margin: 40px auto 0; background: var(--papier-hell); color: #17393A;
+  border-radius: 20px; padding: 28px clamp(20px, 5vw, 48px) 36px; box-shadow: var(--schatten);
+}
+.blatt h1 { color: var(--petrol); font-size: 2rem; margin: 0 0 8px; }
+.blatt h2 { color: var(--tuerkis); font-size: 1.15rem; margin: 28px 0 6px; }
+.blatt a { color: var(--tuerkis); }
+.blatt a:hover { color: var(--orange); }
+.zurueck { display: inline-block; margin-top: 32px; font-weight: 600; text-decoration: none; }
+
+footer { padding: 32px 0 44px; text-align: center; font-size: 0.92rem; opacity: 0.85; }
+footer a { margin: 0 8px; }
+
+/* Einblenden beim Laden */
+.auf { opacity: 0; transform: translateY(18px); animation: auftauchen 0.8s ease-out forwards; }
+.auf.v1 { animation-delay: 0.1s; } .auf.v2 { animation-delay: 0.25s; } .auf.v3 { animation-delay: 0.4s; }
+.auf.v4 { animation-delay: 0.55s; } .auf.v5 { animation-delay: 0.7s; }
+@keyframes auftauchen { to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .auf { opacity: 1; transform: none; }
+}
